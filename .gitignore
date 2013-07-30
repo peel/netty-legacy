@@ -1,0 +1,28 @@
+# Eclipse related (and M2e)
+.classpath
+.project
+.settings/
+.metadata/
+test-output/
+
+# Maven related (and some plugins)
+target/
+*~
+dist
+*.ser
+*.ec
+
+# Intellij
+*.ipr
+*.iml
+*.iws
+.idea
+.temp
+.ensime
+
+# Other
+.svn/
+bin/
+bak/
+*.log
+*.orig
