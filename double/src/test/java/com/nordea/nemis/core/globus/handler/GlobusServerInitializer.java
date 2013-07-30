@@ -1,6 +1,5 @@
 package com.nordea.nemis.core.globus.handler;
 
-import com.nordea.nemis.core.globus.handler.GlobusServerHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -12,7 +11,7 @@ import io.netty.handler.codec.string.StringEncoder;
 public class GlobusServerInitializer extends ChannelInitializer<SocketChannel> {
     private static final StringDecoder DECODER = new StringDecoder();
     private static final StringEncoder ENCODER = new StringEncoder();
-    private static final GlobusServerHandler GLOBUSHANDLER = new GlobusServerHandler();
+    private static final GlobusServerHandshakeHandler GLOBUSHANDLER = new GlobusServerHandshakeHandler();
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();

@@ -14,18 +14,23 @@ public class GlobusServer {
     }
 
     public void run() throws Exception{
-        ServerBootstrap b = new ServerBootstrap();
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-        b.group(bossGroup, workerGroup)
-                .channel(NioServerSocketChannel.class)
-                .childHandler(new GlobusServerInitializer());
+        try{
+            ServerBootstrap b = new ServerBootstrap();
+            b.group(bossGroup, workerGroup)
+                    .channel(NioServerSocketChannel.class)
+                    .childHandler(new GlobusServerInitializer());
 
-        b.bind(port).sync().channel().closeFuture().sync();
+            b.bind(port).sync().channel().closeFuture().sync();
+        }finally {
+            bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
+        }
     }
 
     public static void main(String[] args) throws Exception {
-        int port = (args.length>0) ? Integer.parseInt(args[0]) : 8080;
+        int port = (args.length>0) ? Integer.parseInt(args[0]) : 9999;
         new GlobusServer(port).run();
     }
 }
